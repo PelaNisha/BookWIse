@@ -2,16 +2,43 @@ from urllib import response
 from xxlimited import foo
 import pandas as pd
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import numpy as np # linear algebra
 import pandas as pd
 from scipy.sparse.linalg import svds
 from .models import user_data
-
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from .forms import InputForm
- 
+from django.contrib.auth.decorators import login_required
+
+import logging
+import shutil
+# from pyrsistent import T
+logger = logging.getLogger(__name__)
+from datetime import datetime
+
+
+
+def login_page(request):
+	if(request.user.is_authenticated):
+		return redirect('home')
+	else:
+		if request.method =='POST':
+			username = request.POST.get("user")
+			password = request.POST.get("pass")
+			user = authenticate(username=username, password=password)      
+
+			if user is not None:
+				login(request, user)
+				return redirect('home')
+			else:
+				return render(request, "login.html", {"error":True})
+		return render(request, "login.html")
+
 # Create your views here.
+
 def home_view(request):
 	form = InputForm(request.POST, request.POST)
 	# print(request.POST)
@@ -42,11 +69,13 @@ def home(request):
 		select_book_img = book_df.loc[book_df['Book-Title'] == selected_book]['Image-URL-L'].item()
 		return render(request, 'recom.html', {'output':True, 'select_book_title': select_book_title, 'select_book_author':select_book_author, 'select_book_img':select_book_img, 'select_book_ISBN':select_book_ISBN})
 
+	return render(request, 'home.html', { 'books': books})
 
-	return render(request, 'home.html', {'r':True, 'books': books})
+@login_required(login_url='/login/') 
+def read_now(request):
+	return render(request, 'read_now.html')
 
-
-
+@login_required(login_url='/login/') 
 def add_to_cart(request):
 	print("Ah")
 	if request.method=="POST":
@@ -58,15 +87,14 @@ def add_to_cart(request):
 		book_name = request.POST.get('r_book')
 		author= request.POST.get('book_author')
 		user_data.objects.create(book_id = book_id, u_name=u_name, book_name=book_name, author = author)
-		return render(request, 'home.html', {'r':True})
+		return render(request, 'recom.html', {'r':True})
 	else:
-		return render(request, 'home.html', {'r':True})
+		return render(request, 'recom.html')
 
 
-
-
-
-
+def custom_logout(request):
+	logout(request)
+	return redirect('home')
 
 
 
