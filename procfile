@@ -1,2 +1,1 @@
 web: gunicorn book_recom.wsgi --log-file -
-worker: celery -A book_recom worker --loglevel=info
