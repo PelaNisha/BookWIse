@@ -14,7 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from .forms import InputForm
 from django.contrib.auth.decorators import login_required
-
+import os 
 import logging
 import shutil
 # from pyrsistent import T
@@ -23,11 +23,12 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 from scipy.sparse.linalg import svds
+base_dir = os.path.abspath('.')
+print("base dir ", base_dir)
 
-# # Load data once during application startup
-book_df = pd.read_csv('/home/pela/Documents/SE project/book_recom_main/static/data files/Books.csv')
-ratings_df = pd.read_csv('/home/pela/Documents/SE project/book_recom_main/static/data files/Ratings.csv').sample(40000)
-user_df = pd.read_csv('/home/pela/Documents/SE project/book_recom_main/static/data files/Users.csv')
+book_df = pd.read_csv(base_dir+'/book_recom_main/static/data files/Books.csv')
+ratings_df = pd.read_csv(base_dir+'/book_recom_main/static/data files/Ratings.csv').sample(40000)
+user_df = pd.read_csv(base_dir+'/book_recom_main/static/data files/Users.csv')
 
 # Merge dataframes
 user_rating_df = ratings_df.merge(user_df, left_on='User-ID', right_on='User-ID')
