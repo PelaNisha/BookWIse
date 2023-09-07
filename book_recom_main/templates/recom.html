@@ -25,6 +25,11 @@ BookWise
             <label for="book_author">Author:</label>
             <input type="hidden" name="book_author" id="book_author" value="{{ select_book_author }}">
             <h6 class="text-muted">{{ select_book_author }}</h6>
+            <br>
+            <!-- Image -->
+            <div class="author-image-container">
+              <img src="{{ select_book_img }}" alt="Book Cover" class="img-fluid" style="max-height: 300px; max-width: 100%;">
+            </div>
           </div>
 
           <!-- Table Column (on the right side) -->
@@ -39,27 +44,25 @@ BookWise
                   <th>Price</th>
                 </tr>
               </thead>
+
               <tbody>
+                {% for item in s_b %}
                 <tr>
-                  <td>X</td>
+                  <td> {{ item }} </td>
                   <td>Y</td>
                   <td>Data 3</td>
                 </tr>
+                    <!-- <li class="list-group-item"></li> -->
+                {% endfor %}
+        
                 <!-- Add more rows as needed -->
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- Image Column (Optional: Adjust height and width as needed) -->
-        <div class="row">
-          <div class="col-md-6 border-end"> <!-- Add border to separate left and right -->
-            <img src="{{ select_book_img }}" alt="Book Cover" class="img-fluid" style="max-height: 300px; max-width: 100%;">
-          </div>
-        </div>
-
         <!-- Buttons -->
-        <div class="row mt-2"> <!-- Add margin-top to create space between buttons and bottom border -->
+        <div class="row mt-0"> <!-- Add margin-top to create space between buttons and bottom border -->
           <div class="col-md-6 border-end"> <!-- Add border to separate left and right -->
             <button type="submit" class="btn btn-success btn-block">Add to Cart</button> <!-- Make the button full-width -->
             <a href="/read_now" class="btn btn-primary">Read Now</a>

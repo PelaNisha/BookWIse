@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
@@ -29,37 +28,46 @@
     <link href="static/css/main.css" rel="stylesheet" media="all">
 
     <style>
-        .container_button {
-            position: absolute;
-            top: 65%;
-            left: 5%;
-            width: 400px;
-            height: 300px;
-            border: 1px solid #f1f1f1; /* Fixed border-style typo */
-            transform: translateY(-50%);
-            background-color: #f2f2f2;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        body {
+            font-family: 'Arial', sans-serif; /* Change to your preferred font family */
+            font-size: 16px;
         }
 
-        .image-container {
-            position: relative;
+        /* Update font styles for titles and headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Verdana', sans-serif; /* Change to your preferred font family */
+            color: #333; /* Change the text color */
+        }
+
+        /* Add styles for paragraphs */
+        p {
+            line-height: 1.5; /* Adjust line height for better readability */
+        }
+
+        /* Update styles for links */
+        a {
+            color: #007bff; /* Change link color */
+            text-decoration: none;
+            
+        }
+
+        /* Updated styles for the footer */
+        .main-footer {
+            background-color: white; /* Set the background color to white */
+            position: fixed;
+            bottom: 0;
             width: 100%;
-            height: 400px;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px solid #ccc;
         }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .d-flex {
-            position: absolute;
-            top: 10px; /* Added "px" unit to top value */
-            right: 0;
-        }
+        a:hover {
+        text-shadow: 0 0 15px rgb(11, 99, 231); /* Adjust the glow effect as needed */
+    }
+      .title:hover
+      {
+        text-shadow: 0 0 15px rgb(11, 99, 231);  
+      }
     </style>
 </head>
 
@@ -67,35 +75,36 @@
     <div class="wrapper">
         <!-- Navbar -->
         <!-- Navbar -->
-<nav class="navbar navbar-expand-lg" style="background-color: #dfddcd;"> <!-- Change background color here -->
+<nav class="navbar navbar-expand-lg" style="background-color: #ffffff;"> <!-- Change background color here -->
   <div class="container-fluid">
-      <a class="navbar-brand" href="home">BookWise</a>
-      <a class="btn btn-default btn-flat" href="home">Home</a>
-      <a class="btn btn-default btn-flat" href="myprofile">My Books</a>
+      <a class="navbar-brand" href="{% url 'home' %}" style="color: #0a0ecf;">BookWise</a>
+      <a class="btn btn-default btn-flat" href="{% url 'home' %}">Home</a>
+      <a class="btn btn-default btn-flat" href="{% url 'myprofile' %}">My Books</a>
       {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}" class="btn btn-default btn-flat">Log out</a>
+      <a href="{% url 'logout' %}" class="btn btn-default btn-flat" style="color: #0a0ecf;">Log out</a>
       {% else %}
-            <a href="{% url 'login' %}" class="nav-link">Login</a>
+            <a href="{% url 'login' %}" class="nav-link" style="color: #0a0ecf;">Login</a>
         {% endif %}
       <!-- Title in the middle -->
       <div class="mx-auto">
-          <h4 class="title">BookWise - Your Personalized Reading Journey</h4>
+          <h4 class="title" >BookWise - Your Personalized Reading Journey</h4>
       </div>
       <!-- Right-aligned items -->
+      <!-- <a href="#" class="btn btn-default btn-flat">Password</a>
       <a href="#" class="btn btn-default btn-flat">Password</a>
-      <a href="#" class="btn btn-default btn-flat">Password</a>
-      <a href="#" class="btn btn-default btn-flat">Password</a>
+      <a href="#" class="btn btn-default btn-flat">Password</a> -->
       <form class="d-flex" role="search">
-          <input class="form-control" list="datalistOptions" id="exampleDataList" name="book_name"
-              placeholder="Type to search...">
-          <datalist id="datalistOptions">
-              {% for book in books %}
-              <option>{{ book }}</option>
-              {% endfor %}
-          </datalist>
-          <button class="btn btn-primary btn-lg" name="submit_book" type="submit"
-              style="background-color: #004B88;">Search</button>
-      </form>
+        <input class="form-control" style="width: 300px; height: 30px;" list="datalistOptions" id="exampleDataList" name="book_name"
+            placeholder="Type to search...">
+        <datalist id="datalistOptions">
+            {% for book in books %}
+            <option>{{ book }}</option>
+            {% endfor %}
+        </datalist>
+        <button class="btn btn-primary" style="height: 30px; background-color: #0a0ecf; padding-right: 10px; margin-right: 10px;" name="submit_book" type="submit">Search</button>
+    </form>
+    
+    
   </div>
 </nav>
 
@@ -105,13 +114,37 @@
             {% endblock %}
         </div>
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023 <a href="#">Nisha Pela</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.0
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="color: black;">
+                        <strong >Copyright &copy; 2023 <a href="#">BookWise</a>.</strong>
+                        All rights reserved.
+                        <div class="float-right d-none d-sm-inline-block">
+                            <b>Version</b> 1.0.0
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchButton = document.getElementsByName("submit_book");
+  const searchInput = document.getElementsByName("book_name");
 
+  searchButton.addEventListener("click", function() {
+    const query = searchInput.value.trim();
+    if (query) {
+      // Use JavaScript to clear the URL query parameters
+      const newUrl = window.location.pathname; // Keep the current path without query parameters
+      history.pushState(null, null, newUrl);
+
+      // You can also trigger a function to load search results here
+      loadSearchResults(query);
+    }
+  });
+});
+
+</script>
 </html>

@@ -13,9 +13,9 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('login', views.login_page, name='login'),
-    path("", views.home, name="home"),
+    path("", views.home__x, name="home"),
     path("upload", views.home_view, name="upload"),
-    path("myprofile", views.myprofile, name="myprofile"),
+    path("myprofile/", views.myprofile, name="myprofile"),
     path('add_to_cart', views.add_to_cart, name='add_to_cart'),
     path('read_now', views.read_now, name='read_now'),
     re_path(

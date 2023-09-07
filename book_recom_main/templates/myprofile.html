@@ -10,12 +10,54 @@ My Profile
         <div class="col-md-12">
             <h1>Hello, {{ user }}!</h1>
             <h3>Your items:</h3>
-            <ul class="list-group">
-                {% for item in di %}
-                    <li class="list-group-item">{{ item }}</li>
-                {% endfor %}
+            <table class="table">
+                <br>
+                <thead>
+                  <tr>
+                    <th>Book Id</th>
+                    <th>Book Title </th>
+                    <th>Author</th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+                  {% for item in di %}
+                  <tr>
+                    <td> {{ item.book_id }} </td>
+                    <td> {{ item.book_name }} </td>
+                    <td> {{ item.author }} </td>
+                  </tr>
+                      <!-- <li class="list-group-item"></li> -->
+                  {% endfor %}
+          
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
             </ul>
         </div>
     </div>
 </div>
+
+<script>
+    function trimURL() {
+        // Get the current URL
+        var currentURL = window.location.href;
+
+        // Check if the URL contains '/myprofile/'
+        if (currentURL.includes('/myprofile/')) {
+            // Replace '/myprofile/' with '/'
+            var trimmedURL = currentURL.replace('/myprofile/', '/');
+
+            // Update the URL in the address bar
+            window.history.replaceState({}, '', trimmedURL);
+        }
+    }
+
+    // Call the trimURL function initially
+    trimURL();
+
+    // Listen for changes in the URL (e.g., when navigating back)
+    window.addEventListener('popstate', trimURL);
+</script>
+
 {% endblock %}
