@@ -75,9 +75,9 @@
     <div class="wrapper">
         <!-- Navbar -->
         <!-- Navbar -->
-<nav class="navbar navbar-expand-lg" style="background-color: #ffffff;"> <!-- Change background color here -->
+<nav class="navbar navbar-expand-lg" style="background-color: #ffffff; letter-spacing: 1.5px;"> <!-- Change background color here -->
   <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}" style="color: #0a0ecf;">BookWise</a>
+      <a class="navbar-brand" href="{% url 'home' %}" style="color: #0a0ecf; font-size: 25px;">BookWise</a>
       <a class="btn btn-default btn-flat" href="{% url 'home' %}">Home</a>
       <a class="btn btn-default btn-flat" href="{% url 'myprofile' %}">My Books</a>
       {% if user.is_authenticated %}
@@ -87,21 +87,23 @@
         {% endif %}
       <!-- Title in the middle -->
       <div class="mx-auto">
-          <h4 class="title" >BookWise - Your Personalized Reading Journey</h4>
+          <!-- <h5 class="title" > BookWise - Your Personalized Reading Journey</h5> -->
       </div>
       <!-- Right-aligned items -->
       <!-- <a href="#" class="btn btn-default btn-flat">Password</a>
       <a href="#" class="btn btn-default btn-flat">Password</a>
       <a href="#" class="btn btn-default btn-flat">Password</a> -->
-      <form class="d-flex" role="search">
-        <input class="form-control" style="width: 300px; height: 30px;" list="datalistOptions" id="exampleDataList" name="book_name"
+      <form class="d-flex" role="search" style="letter-spacing: 1.5px;">
+        <input class="form-control" style="width: 350px; height: 30px; margin-right: 10px;" list="datalistOptions" id="exampleDataList" name="book_name"
             placeholder="Type to search...">
         <datalist id="datalistOptions">
             {% for book in books %}
             <option>{{ book }}</option>
             {% endfor %}
         </datalist>
-        <button class="btn btn-primary" style="height: 30px; background-color: #0a0ecf; padding-right: 10px; margin-right: 10px;" name="submit_book" type="submit">Search</button>
+        <button class="btn btn-primary d-flex align-items-center" style="height: 30px; background-color: #0a0ecf; padding-right: 10px; padding-left: 10px;" name="submit_book" type="submit">
+            <span style="margin: auto;">Search</span>
+        </button>
     </form>
     
     
@@ -113,11 +115,11 @@
             {% block content %}
             {% endblock %}
         </div>
-        <footer class="main-footer">
+        <footer class="main-footer" style="letter-spacing: 1.5px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12" style="color: black;">
-                        <strong >Copyright &copy; 2023 <a href="#">BookWise</a>.</strong>
+                    <div class="col-md-12" style="color: black; ">
+                        <a >Copyright &copy; 2023 <a href="#">BookWise</a>.</a>
                         All rights reserved.
                         <div class="float-right d-none d-sm-inline-block">
                             <b>Version</b> 1.0.0

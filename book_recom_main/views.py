@@ -173,11 +173,12 @@ def home__x(request):
 		# print("sliced ", sliced)
 		s_b = similar_books(book_user_rating, movie_id, top_cosine_similarity(sliced, movie_id, top_n))
 		print(type(s_b))
-		return render(request, 'recom.html', {'output': True, 'select_book_title': select_book_title, 'select_book_author': select_book_author, 'select_book_img': select_book_img, 's_b': s_b})
+		return render(request, 'recom.html', {'output': True, 'select_book_title': select_book_title, 'select_book_author': select_book_author, 'select_book_img': select_book_img,'select_book_ISBN':select_book_ISBN, 's_b': s_b})
 
 	return render(request, 'home.html', {'r': True, 'books': books})
 
 
+@login_required(login_url='/login/') 
 def myprofile(request):
 	user = str(request.user.username)
 	foo_instance =user_data.objects.all().values()
